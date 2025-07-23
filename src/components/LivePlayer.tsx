@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { default as HlsType } from 'hls.js';
 
 import { LiveStream } from '@/app/api/live/route';
 
@@ -12,7 +11,7 @@ interface LivePlayerProps {
 
 export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const hlsRef = useRef<HlsType | null>(null);
+  const hlsRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const retryCountRef = useRef(0);
@@ -46,7 +45,7 @@ export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
             maxMaxBufferLength: 60,
           });
 
-          hlsRef.current = hls;
+          hlsRef.current = hls as any;
 
           // 加载直播流
           hls.loadSource(channel.url);
