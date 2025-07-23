@@ -1,5 +1,88 @@
 {
   "cache_time": 7200,
+  "live_streams": {
+    "央视频道": [
+      {
+        "name": "CCTV1综合",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226559/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV1.png"
+      },
+      {
+        "name": "CCTV2财经",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226540/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV2.png"
+      },
+      {
+        "name": "CCTV3综艺",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226021/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV3.png"
+      },
+      {
+        "name": "CCTV4中文国际",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226428/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV4.png"
+      },
+      {
+        "name": "CCTV5体育",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226019/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV5.png"
+      },
+      {
+        "name": "CCTV6电影",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226010/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV6.png"
+      },
+      {
+        "name": "CCTV13新闻",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226537/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV13.png"
+      }
+    ],
+    "卫视频道": [
+      {
+        "name": "湖南卫视",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226307/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/湖南卫视.png"
+      },
+      {
+        "name": "浙江卫视",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226339/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/浙江卫视.png"
+      },
+      {
+        "name": "江苏卫视",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226310/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/江苏卫视.png"
+      },
+      {
+        "name": "东方卫视",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226345/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/东方卫视.png"
+      },
+      {
+        "name": "北京卫视",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226450/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/北京卫视.png"
+      }
+    ],
+    "体育频道": [
+      {
+        "name": "CCTV5体育",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226019/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV5.png"
+      },
+      {
+        "name": "CCTV5+体育赛事",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225603/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/CCTV5+.png"
+      },
+      {
+        "name": "咪咕体育",
+        "url": "http://ottrrs.hl.chinamobile.com/PLTV/88888888/8/3221226124/index.m3u8",
+        "logo": "https://live.fanmingming.com/tv/咪咕体育.png"
+      }
+    ]
+  },
   "api_site": {
     "dyttzy": {
       "api": "http://caiji.dyttzyapi.com/api.php/provide/vod",

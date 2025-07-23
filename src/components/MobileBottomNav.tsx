@@ -1,6 +1,6 @@
 'use client';
 
-import { Clover, Film, Home, Search, Tv } from 'lucide-react';
+import { Film, Home, Radio, Search, Tv } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -20,6 +20,7 @@ const MobileBottomNav = ({ activePath }: MobileBottomNavProps) => {
   const navItems = [
     { icon: Home, label: '首页', href: '/' },
     { icon: Search, label: '搜索', href: '/search' },
+    { icon: Radio, label: '直播', href: '/live' },
     {
       icon: Film,
       label: '电影',
@@ -29,11 +30,6 @@ const MobileBottomNav = ({ activePath }: MobileBottomNavProps) => {
       icon: Tv,
       label: '剧集',
       href: '/douban?type=tv',
-    },
-    {
-      icon: Clover,
-      label: '综艺',
-      href: '/douban?type=show',
     },
   ];
 
