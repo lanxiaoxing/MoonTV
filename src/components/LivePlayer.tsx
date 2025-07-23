@@ -35,7 +35,7 @@ export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
             hlsRef.current.destroy();
           }
 
-          // 创建新的 HLS 实例
+          // 创建新的 HLS 实例，配置跨域和重试
           const hls = new Hls({
             enableWorker: true,
             lowLatencyMode: true,
@@ -43,12 +43,26 @@ export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
             maxLoadingDelay: 4,
             maxBufferLength: 30,
             maxMaxBufferLength: 60,
+            // 跨域配置
+            xhrSetup: (xhr, _url) => {
+              xhr.withCredentials = false;
+            },
+            // 重试配置
+            manifestLoadingRetryDelay: 1000,
+            manifestLoadingMaxRetry: 4,
+            levelLoadingRetryDelay: 1000,
+            levelLoadingMaxRetry: 4,
+            fragLoadingRetryDelay: 1000,
+            fragLoadingMaxRetry: 6,
           });
 
           hlsRef.current = hls as any;
 
+          // 使用代理URL来避免HTTPS/HTTP混合内容问题
+          const proxyUrl = `/api/live-proxy?url=${encodeURIComponent(channel.url)}`;
+          
           // 加载直播流
-          hls.loadSource(channel.url);
+          hls.loadSource(proxyUrl);
           hls.attachMedia(video);
 
           // 监听事件
@@ -73,7 +87,7 @@ export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
                       hls.startLoad();
                     }, 1000 * retryCountRef.current);
                   } else {
-                    setError('网络连接失败，请检查网络或稍后重试');
+                    setError('网络连接失败，请检查网络或稍后重试。可能是跨域或HTTPS问题。');
                     setIsLoading(false);
                   }
                   break;
@@ -84,7 +98,7 @@ export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
                 default:
                   console.error('Fatal error, destroying HLS instance');
                   hls.destroy();
-                  setError('播放器错误，请刷新页面重试');
+                  setError('播放器错误，可能是直播源不可用或跨域限制');
                   setIsLoading(false);
                   break;
               }
@@ -95,8 +109,9 @@ export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
             setIsLoading(false);
           });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          // Safari 原生支持 HLS
-          video.src = channel.url;
+          // Safari 原生支持 HLS - 也使用代理
+          const proxyUrl = `/api/live-proxy?url=${encodeURIComponent(channel.url)}`;
+          video.src = proxyUrl;
           video.addEventListener('loadstart', () => setIsLoading(false));
           video.addEventListener('error', () => {
             setError('播放失败，请检查直播源');
@@ -114,8 +129,9 @@ export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
         }
       } catch (error) {
         console.error('Failed to load HLS.js:', error);
-        // 回退到原生播放
-        video.src = channel.url;
+        // 回退到原生播放 - 也使用代理
+        const proxyUrl = `/api/live-proxy?url=${encodeURIComponent(channel.url)}`;
+        video.src = proxyUrl;
         video.addEventListener('loadstart', () => setIsLoading(false));
         video.addEventListener('error', () => {
           setError('播放失败，请检查直播源');
