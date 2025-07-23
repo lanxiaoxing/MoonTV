@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { BackButton } from './BackButton';
 import { LogoutButton } from './LogoutButton';
 import MobileBottomNav from './MobileBottomNav';
@@ -21,7 +23,15 @@ const PageLayout = ({ children, activePath = '/' }: PageLayoutProps) => {
       <div className='flex md:grid md:grid-cols-[auto_1fr] w-full min-h-screen md:min-h-auto'>
         {/* 侧边栏 - 桌面端显示，移动端隐藏 */}
         <div className='hidden md:block'>
-          <Sidebar activePath={activePath} />
+          <Suspense fallback={
+            <div className="w-64 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-center h-16">
+                <div className="animate-pulse bg-gray-200 dark:bg-gray-800 h-8 w-24 rounded"></div>
+              </div>
+            </div>
+          }>
+            <Sidebar activePath={activePath} />
+          </Suspense>
         </div>
 
         {/* 主内容区域 */}
@@ -54,7 +64,17 @@ const PageLayout = ({ children, activePath = '/' }: PageLayoutProps) => {
 
       {/* 移动端底部导航 */}
       <div className='md:hidden'>
-        <MobileBottomNav activePath={activePath} />
+        <Suspense fallback={
+          <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 h-14">
+            <div className="flex justify-around items-center h-full px-4">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div key={i} className="animate-pulse bg-gray-200 dark:bg-gray-800 h-8 w-8 rounded"></div>
+              ))}
+            </div>
+          </div>
+        }>
+          <MobileBottomNav activePath={activePath} />
+        </Suspense>
       </div>
     </div>
   );

@@ -8,8 +8,7 @@ import { SearchResult } from '@/lib/types';
 
 export const runtime = 'edge';
 
-export async function GET(request: NextRequest) {
-  console.log(request.url);
+export async function GET(_request: NextRequest) {
   try {
     console.log('Cron job triggered:', new Date().toISOString());
 

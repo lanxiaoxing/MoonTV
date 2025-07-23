@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 import { config as runtimeConfig } from '@/lib/runtime';
 
@@ -13,26 +13,10 @@ export interface LiveCategory {
 }
 
 // 获取直播频道列表
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url);
-    const category = searchParams.get('category');
-
     // 直接从 runtime config 读取直播流数据
     const liveStreams = (runtimeConfig as any).live_streams || {};
-
-    if (category) {
-      // 返回指定分类的频道
-      const channels = liveStreams[category] || [];
-      return NextResponse.json({
-        code: 200,
-        message: 'success',
-        data: {
-          category,
-          channels,
-        },
-      });
-    }
 
     // 返回所有分类和频道
     return NextResponse.json({

@@ -1,7 +1,7 @@
 'use client';
 
 import { Radio } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import LivePlayer from '@/components/LivePlayer';
 import PageLayout from '@/components/PageLayout';
@@ -16,7 +16,7 @@ export interface LiveData {
   [categoryName: string]: LiveStream[];
 }
 
-export default function LivePage() {
+function LivePageContent() {
   const [liveData, setLiveData] = useState<LiveData>({});
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>('');
@@ -175,5 +175,34 @@ export default function LivePage() {
         )}
       </div>
     </PageLayout>
+  );
+}
+
+export default function LivePage() {
+  return (
+    <Suspense fallback={
+      <PageLayout>
+        <div className="px-2 sm:px-10 py-4 sm:py-8">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/4 mb-6 dark:bg-gray-800"></div>
+            <div className="flex space-x-4 mb-6">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="h-10 bg-gray-200 rounded w-20 dark:bg-gray-800"></div>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div key={i} className="bg-gray-200 rounded-lg p-4 dark:bg-gray-800">
+                  <div className="h-4 bg-gray-300 rounded mb-2 dark:bg-gray-700"></div>
+                  <div className="h-3 bg-gray-300 rounded w-3/4 dark:bg-gray-700"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </PageLayout>
+    }>
+      <LivePageContent />
+    </Suspense>
   );
 }
