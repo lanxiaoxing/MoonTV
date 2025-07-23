@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type Hls from 'hls.js';
+import type { default as HlsType } from 'hls.js';
 
 import { LiveStream } from '@/app/api/live/route';
 
@@ -12,7 +12,7 @@ interface LivePlayerProps {
 
 export default function LivePlayer({ channel, onClose }: LivePlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const hlsRef = useRef<Hls | null>(null);
+  const hlsRef = useRef<HlsType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const retryCountRef = useRef(0);
