@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 
 import { config as runtimeConfig } from '@/lib/runtime';
 
+export const runtime = 'edge';
+
 export interface LiveStream {
   name: string;
   url: string;
