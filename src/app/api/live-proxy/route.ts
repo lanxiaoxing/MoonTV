@@ -16,8 +16,13 @@ export async function GET(request: NextRequest) {
   try {
     // 验证URL是否为预期的直播流域名
     const allowedDomains = [
-      'ottrrs.hl.chinamobile.com',
-      'live.fanmingming.com'
+      'live-hls-web-aje.getaj.net',
+      'static.france24.com',
+      'f24hls-i.akamaihd.net',
+      'news.cgtn.com',
+      'live.cgtn.com',
+      'cph-p2p-msl.akamaized.net',
+      'bitdash-a.akamaihd.net'
     ];
     
     const urlObj = new URL(streamUrl);
